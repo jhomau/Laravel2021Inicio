@@ -41,9 +41,18 @@ Route::get('/',['as'=>'home',function(){
 Route::get('saludo/{nombre?}',['as'=>'saludo',function($nombre = "Invitado"){
     //return view('saludo',['nombre'=>$nombre]); // Otra forma de enviar parametro por ruta
     //return view('saludo')->with(['pasar'=>$nombre]); // pasar es el nombre para la recupera en la vista el dato de NOMBRE o lo que se envie por ruta
-    return view('saludo',compact('nombre'));
+    
+    $html = "<h2>Contenido html</h2>"; //Ingreso el usuario es un script
+    $script = "<script>alert('Problema XSS - Cross Site Scripting! ')</script>";
+    $consolas = [
+        'Play Station 4',
+        'Xbox One',
+        'Wii U'
+    ];
+
+    return view('saludo',compact('nombre','html','script','consolas'));
 }]);
 Route::get('contactame',['as'=>'contacto',function(){
-    return "Hola desde pagina contacto";
+    return view('contactos');
 }]);
 /* */
