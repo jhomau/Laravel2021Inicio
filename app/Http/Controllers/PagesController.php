@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SebastianBergmann\Environment\Console;
 
 class PagesController extends Controller
 {
@@ -25,5 +26,13 @@ class PagesController extends Controller
         return view('contactos');
     }
 
+    public function mensaje(Request $request)
+    {
+      if ($request->has("nombre")) {
+        
+        return 'Si tiene nombre. Es '. $request->input('nombre');
 
+      }
+        return 'No tiene nombre';
+    }
 }

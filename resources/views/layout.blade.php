@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <style>
+        .active{
+            text-decoration: none;
+            color: green;
+        }
+    </style>
+    
     <title>Mi sitio</title>
 </head>
 <body>
     <header>
+        <?php
+            function activeMenu($url)
+            {
+                return request()->is($url) ? 'active' : '';
+            }   
+        ?>
+
         <nav>
-            <a href="<?php echo route('home') ?>">Inicio</a>
-            <a href="<?php echo route('saludo','Mauricio') ?>">Saludo</a> <!--Recuperamos los alias de las rutas con php y comando route-->
-            <a href="<?php echo route('contacto') ?>">Contactos</a>
+            <a class="{{ activeMenu('/') }}" href="{{ route('home') }}">Inicio</a>
+            <a class="{{ activeMenu('saludo/*') }}" href="{{ route('saludo','Mauricio') }}">Saludo</a>
+            <a class="{{ activeMenu('contactame') }}" href="{{ route('contacto') }}">Contactos</a>
         </nav>
     </header>
     @yield('contenido')
